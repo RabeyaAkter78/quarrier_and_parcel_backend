@@ -1,13 +1,10 @@
 /* eslint-disable prettier/prettier */
 export interface IUser {
-  name: {
-    frist: string
-    last: string
-  }
+  name: string
   age?: number
   email: string
   password: string
   photo?: string | null
-  role: 'user' | 'admin'
+  role: 'customer' | 'admin' | 'agent'
   userStatus: 'active' | 'inactive'
 }

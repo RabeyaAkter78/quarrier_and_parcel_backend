@@ -7,19 +7,9 @@ import config from '../../config'
 const userSchema = new Schema<IUser>({
   name: {
     type: String,
-    frist: {
-      type: String,
-      required: [true, 'Please Enter your Frist Name'],
-    },
-    last: {
-      type: String,
-      required: [true, 'Please Enter your Last Name'],
-    },
+    required: [true, 'Please Enter your name'],
   },
-  // age: {
-  //   type: Number,
-  //   required: [true, 'Please Enter your age'],
-  // },
+
   age: {
     type: Number,
   },
@@ -44,10 +34,10 @@ const userSchema = new Schema<IUser>({
   role: {
     type: String,
     enum: {
-      values: ['user', 'admin'],
+      values: ['customer', 'admin', 'agent'],
       message: '{VALUE}is not not a valid role',
     },
-    default: 'user',
+    default: 'customer',
     required: true,
   },
 

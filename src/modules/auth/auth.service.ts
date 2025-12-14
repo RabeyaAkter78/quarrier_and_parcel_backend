@@ -37,7 +37,7 @@ const login = async (payload: ILoginUser) => {
       role: user.role,
     },
     config.jwt_secret,
-    { expiresIn: '1d' }
+    { expiresIn: '6d' }
   )
 
   const verifiedUser = {

@@ -7,8 +7,8 @@ import auth from '../../middlewares/auth'
 const userRoutes = Router()
 
 userRoutes.post(
-  // '/create-user',
-  '/create-admin',
+  '/create-user',
+  // '/create-admin',
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const parsedBody = await userValidation.userValidationSchema.parseAsync(
