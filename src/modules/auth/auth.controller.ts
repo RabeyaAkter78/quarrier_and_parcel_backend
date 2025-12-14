@@ -25,7 +25,21 @@ const login = catchAsync(async (req: Request, res: Response) => {
     data: result.verifiedUser,
   })
 })
+
+const getMyProfile = catchAsync(
+  async (req: Request & { user?: { email: string } }, res: Response) => {
+    const result = await AuthService.getMyProfile(req.user!)
+    sendResponse(res, {
+      status: true,
+      StatusCode: StatusCodes.CREATED,
+      message: 'Profile Get Successfully',
+      data: result,
+    })
+  }
+)
+
 export const AuthController = {
   register,
   login,
+  getMyProfile,
 }

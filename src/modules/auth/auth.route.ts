@@ -4,6 +4,7 @@ import { AuthController } from './auth.controller'
 import validateRequest from '../../middlewares/validateRequest'
 import { userValidation } from '../user/userValidation'
 import { AuthValidation } from './auth.validation'
+import auth from '../../middlewares/auth'
 
 const authRoute = Router()
 
@@ -13,8 +14,11 @@ authRoute.post(
   AuthController.register
 )
 
-authRoute.post('/login',validateRequest(AuthValidation.loginValidationSchema),AuthController.login)
-
-
+authRoute.post(
+  '/login',
+  validateRequest(AuthValidation.loginValidationSchema),
+  AuthController.login
+)
+authRoute.get('/me', auth(), AuthController.getMyProfile)
 
 export default authRoute

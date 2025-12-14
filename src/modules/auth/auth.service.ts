@@ -51,8 +51,21 @@ const login = async (payload: ILoginUser) => {
     token,
   }
 }
+const getMyProfile = async (user: { email: string }) => {
+  const foundUser = await User.findOne({ email: user.email })
+  if (!foundUser) {
+    throw new Error('User not found')
+  }
+
+  return {
+    name: foundUser.name,
+    email: foundUser.email,
+    role: foundUser.role,
+  }
+}
 
 export const AuthService = {
   register,
   login,
+  getMyProfile,
 }

@@ -7,11 +7,11 @@ import User from '../modules/user/user.model'
 
 const auth = (...RequiredRole: string[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization
-
-    if (!token) {
+    const authHeader = req.get('Authorization')
+    if (!authHeader) {
       throw new Error('You are not Authorized')
     }
+    const token = authHeader.split(' ')[1]
     const decoded = jwt.verify(token, config.jwt_secret!) as JwtPayload
     const { email, role } = decoded
 
@@ -20,7 +20,7 @@ const auth = (...RequiredRole: string[]) => {
     if (!user) {
       throw new Error('User not found')
     }
-    if (RequiredRole && !RequiredRole.includes(role)) {
+    if (RequiredRole.length && !RequiredRole.includes(role)) {
       throw new Error('You are not Authorized')
     }
     req.user = decoded as JwtPayload
